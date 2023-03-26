@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %}
+  Hostels
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row mt-5">
+    <div class="col-10 mx-auto col-md-6 my-3">
+        <img class="img-fluid" src="{{hostel.image.url}}">
+    </div>
+    </div>
+</div>
+    <div class="col-10 mx-auto col-md-6 my-3">
+        <div>
+            <h1 class="product_titel">
+                {{hostel.name}}
+            </h1>
+            <h5 class="text-info font-italic mb-4">
+                {{hostel.price}}₴
+              </h5>
+            <p class="product_desc"> Hostel Description</p>
+            <p class="text-justify product_text">
+                {{hostel.description}}   
+            </p>
+            {% if hostel.stock <= 0 %}
+            <p class="text-justify product_text">
+                Out of Stock
+            </p>
+            {% else %}
+            <div class="text-primary">
+               Available places ({{count}})
+            </div><br>
+            {% if not student.hostel %}
+            <a href="{% url 'settlement' hostel_id=hostel.id %}"><button class="btn btn-primary">Add to settlement </button>  </a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
